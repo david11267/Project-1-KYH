@@ -1,0 +1,50 @@
+﻿@page
+@model Project_1_KYH.Pages.Projects.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Project.id" />
+            <div class="form-group">
+                <label asp-for="Project.projectName" class="control-label"></label>
+                <input asp-for="Project.projectName" class="form-control" />
+                <span asp-validation-for="Project.projectName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.budget" class="control-label"></label>
+                <input asp-for="Project.budget" class="form-control" />
+                <span asp-validation-for="Project.budget" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.status" class="control-label"></label>
+                <input asp-for="Project.status" class="form-control" />
+                <span asp-validation-for="Project.status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.details" class="control-label"></label>
+                <textarea asp-for="Project.details" class="form-control" ></textarea>
+                <span asp-validation-for="Project.details" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
