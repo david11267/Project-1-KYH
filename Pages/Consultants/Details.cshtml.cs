@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Project_1_KYH.Data;
 using Project_1_KYH.Models;
 
-namespace Project_1_KYH.Pages.Projects
+namespace Project_1_KYH.Pages.Consultants
 {
     public class DetailsModel : PageModel
     {
@@ -19,8 +19,7 @@ namespace Project_1_KYH.Pages.Projects
             _context = context;
         }
 
-        public Project Project { get; set; }
-        public List<Consultant> Consultants { get; set; }
+        public Consultant Consultant { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,11 +28,9 @@ namespace Project_1_KYH.Pages.Projects
                 return NotFound();
             }
 
-            Project = await _context.Projects
-                .Include(c=> c.Company).Include(c=>c.Consultants).FirstOrDefaultAsync(m => m.id == id);
-                
+            Consultant = await _context.Consultants.FirstOrDefaultAsync(m => m.id == id);
 
-            if (Project == null)
+            if (Consultant == null)
             {
                 return NotFound();
             }

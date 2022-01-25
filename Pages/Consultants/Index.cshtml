@@ -1,0 +1,54 @@
+﻿@page
+@model Project_1_KYH.Pages.Consultants.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Consultant[0].hired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Consultant[0].name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Consultant[0].phoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Consultant[0].details)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Consultant) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.hired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.details)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

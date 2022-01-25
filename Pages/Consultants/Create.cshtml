@@ -1,0 +1,49 @@
+﻿@page
+@model Project_1_KYH.Pages.Consultants.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Consultant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Consultant.hired" /> @Html.DisplayNameFor(model => model.Consultant.hired)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Consultant.name" class="control-label"></label>
+                <input asp-for="Consultant.name" class="form-control" />
+                <span asp-validation-for="Consultant.name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Consultant.phoneNumber" class="control-label"></label>
+                <input asp-for="Consultant.phoneNumber" class="form-control" />
+                <span asp-validation-for="Consultant.phoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Consultant.details" class="control-label"></label>
+                <input asp-for="Consultant.details" class="form-control" />
+                <span asp-validation-for="Consultant.details" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

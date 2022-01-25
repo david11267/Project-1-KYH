@@ -20,6 +20,6 @@ namespace Project_1_KYH.Models
         [DisplayName("Skills")]
         public ICollection<Skill>? Skills { get; set; }
         [DisplayName("Consultants")]
-        public List<Consultant>? Consultants { get; set; }
+        public List<Consultant>? Consultants { get; set; } = new List<Consultant>();    
     }
 }

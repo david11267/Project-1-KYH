@@ -1,0 +1,25 @@
+﻿body {
+}
+
+.allTables{
+    color:red;
+    display:grid;
+    grid-auto-flow:column;
+}
+
+.details {
+    
+}
+
+.scrollspy{
+
+}
+
+.list-Group{
+    min-width:100px;
+    margin-right:1rem;
+}
+
+.wrapper {
+    display: flex;
+}

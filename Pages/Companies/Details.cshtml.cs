@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Project_1_KYH.Data;
 using Project_1_KYH.Models;
 
-namespace Project_1_KYH.Pages.Projects
+namespace Project_1_KYH.Pages.Companies
 {
     public class DetailsModel : PageModel
     {
@@ -19,8 +19,11 @@ namespace Project_1_KYH.Pages.Projects
             _context = context;
         }
 
-        public Project Project { get; set; }
-        public List<Consultant> Consultants { get; set; }
+        public Company Company { get; set; }
+        [BindProperty]
+        public List<Project> Projects { get; set; }
+        [BindProperty]
+        public string ProjectAmmount { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,16 +31,20 @@ namespace Project_1_KYH.Pages.Projects
             {
                 return NotFound();
             }
+            Projects = await _context.Projects.ToListAsync();          
+            Company = await _context.Companies
+               .FirstOrDefaultAsync(m => m.ID == id);
+            
+            ProjectAmmount = Projects
+                .Where(p => p.Company != null)
+                .Select(p =>p.Company.ID == Company.ID).Count().ToString();
 
-            Project = await _context.Projects
-                .Include(c=> c.Company).Include(c=>c.Consultants).FirstOrDefaultAsync(m => m.id == id);
-                
-
-            if (Project == null)
+            if (Company == null)
             {
                 return NotFound();
             }
             return Page();
         }
+        
     }
 }

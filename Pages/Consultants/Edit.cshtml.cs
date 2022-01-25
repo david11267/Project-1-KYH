@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Project_1_KYH.Data;
 using Project_1_KYH.Models;
 
-namespace Project_1_KYH.Pages.Projects
+namespace Project_1_KYH.Pages.Consultants
 {
     public class EditModel : PageModel
     {
@@ -21,10 +21,7 @@ namespace Project_1_KYH.Pages.Projects
         }
 
         [BindProperty]
-        public Project Project { get; set; }
-        public IEnumerable<Consultant> Consultants { get; set; }
-        [BindProperty]
-        public List<int> SelectedConsultants { get; set; } = new List<int>();
+        public Consultant Consultant { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,15 +30,9 @@ namespace Project_1_KYH.Pages.Projects
                 return NotFound();
             }
 
-            Project = await _context.Projects
-                .Include(c => c.Company).Include(c=>c.Consultants).FirstOrDefaultAsync(m => m.id == id);
+            Consultant = await _context.Consultants.FirstOrDefaultAsync(m => m.id == id);
 
-            Consultants = await _context.Consultants.ToListAsync();
-            Project.Consultants.ForEach(c => SelectedConsultants.Add(c.id));
-
-            ViewData["Consult"] = new MultiSelectList(_context.Consultants.ToList(), "id", "name");
-
-            if (Project == null)
+            if (Consultant == null)
             {
                 return NotFound();
             }
@@ -57,21 +48,15 @@ namespace Project_1_KYH.Pages.Projects
                 return Page();
             }
 
-            
-            _context.Attach(Project).State = EntityState.Modified;
-           
-            foreach (var item in SelectedConsultants)
-            {
-                Project.Consultants.Add(_context.Consultants
-                    .Find(item));
-            }
+            _context.Attach(Consultant).State = EntityState.Modified;
+
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(Project.id))
+                if (!ConsultantExists(Consultant.id))
                 {
                     return NotFound();
                 }
@@ -84,9 +69,9 @@ namespace Project_1_KYH.Pages.Projects
             return RedirectToPage("./Index");
         }
 
-        private bool ProjectExists(int id)
+        private bool ConsultantExists(int id)
         {
-            return _context.Projects.Any(e => e.id == id);
+            return _context.Consultants.Any(e => e.id == id);
         }
     }
 }

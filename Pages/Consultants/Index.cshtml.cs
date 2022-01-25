@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Project_1_KYH.Data;
 using Project_1_KYH.Models;
 
-namespace Project_1_KYH.Pages.Projects
+namespace Project_1_KYH.Pages.Consultants
 {
     public class IndexModel : PageModel
     {
@@ -19,12 +19,11 @@ namespace Project_1_KYH.Pages.Projects
             _context = context;
         }
 
-        public IList<Project> Project { get;set; }
+        public IList<Consultant> Consultant { get;set; }
 
         public async Task OnGetAsync()
         {
-            Project = await _context.Projects
-                .Include(c => c.Company).ToListAsync();
+            Consultant = await _context.Consultants.ToListAsync();
         }
     }
 }
