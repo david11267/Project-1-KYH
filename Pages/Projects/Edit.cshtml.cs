@@ -57,9 +57,8 @@ namespace Project_1_KYH.Pages.Projects
                 return Page();
             }
 
-            
             _context.Attach(Project).State = EntityState.Modified;
-           
+
             foreach (var item in SelectedConsultants)
             {
                 Project.Consultants.Add(_context.Consultants

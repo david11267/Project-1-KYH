@@ -2,17 +2,9 @@
 }
 
 .allTables{
-    color:red;
+  
     display:grid;
     grid-auto-flow:column;
-}
-
-.details {
-    
-}
-
-.scrollspy{
-
 }
 
 .list-Group{
